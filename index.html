@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="brahim-khalef"/>
+  <meta name="designer" content="brahim-khalef" />
+  <meta name="publishe" content="brahim-khalef"/>
+  <meta name="assistant" content="brahim-khalef"/>
+<title>UNTECK COSMOS —brahim kha </title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap');
+
+:root {
+  --space:   #02020f;
+  --deep:    #050518;
+  --surface: rgba(255,255,255,0.03);
+  --border:  rgba(255,255,255,0.07);
+  --accent:  #7b61ff;
+  --glow:    #a78bfa;
+  --teal:    #22d3ee;
+  --gold:    #fbbf24;
+  --rose:    #f43f5e;
+  --green:   #34d399;
+  --orange:  #fb923c;
+  --blue:    #60a5fa;
+  --white:   #e2e8f0;
+  --muted:   #475569;
+  --muted2:  #64748b;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--space);
+  color: var(--white);
+  font-family: 'Tajawal', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+  cursor: none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor {
+  width:12px; height:12px;
+  background: var(--glow);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+  box-shadow: 0 0 12px var(--glow), 0 0 24px var(--accent);
+}
+#cursor-ring {
+  width:32px; height:32px;
+  border: 1px solid rgba(167,139,250,.4);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all .08s ease;
+}
+
+/* ===== STAR CANVAS ===== */
+#stars-canvas {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  backdrop-filter: blur(16px);
+  background: rgba(2,2,15,.75);
+  border-bottom: 1px solid rgba(123,97,255,.15);
+}
+.logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem; letter-spacing: 4px;
+  background: linear-gradient(90deg, var(--glow), var(--teal));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+nav ul { display:flex; gap:4px; list-style:none; }
+nav ul li a {
+  display: block; padding: 7px 14px;
+  color: var(--muted2); text-decoration: none;
+  font-size: .8rem; font-weight: 700; letter-spacing: 1px;
+  border-radius: 6px;
+  transition: color .2s, background .2s;
+}
+nav ul li a:hover { color: var(--white); background: rgba(255,255,255,.05); }
+
+/* ===== HERO ===== */
+#hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  overflow: hidden;
+}
+.hero-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(123,97,255,.13);
+  animation: expand 8s linear infinite;
+}
+.hero-ring:nth-child(1){ width:320px; height:320px; animation-delay:0s; }
+.hero-ring:nth-child(2){ width:640px; height:640px; animation-delay:2.5s; }
+.hero-ring:nth-child(3){ width:960px; height:960px; animation-delay:5s; }
+@keyframes expand {
+  0%  { opacity:.5; }
+  100%{ opacity:0; transform:scale(1.25); }
+}
+.hero-content { position:relative; z-index:2; animation: fadeUp 1.2s ease both; }
+@keyframes fadeUp {
+  from{ opacity:0; transform:translateY(40px); }
+  to  { opacity:1; transform:translateY(0); }
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap:8px;
+  background: rgba(123,97,255,.12);
+  border: 1px solid rgba(123,97,255,.3);
+  border-radius: 50px; padding: 6px 20px;
+  font-size: .72rem; letter-spacing:3px; color: var(--glow);
+  font-family: 'Orbitron', monospace; margin-bottom: 28px;
+  animation: fadeUp 1s .2s both;
+}
+h1.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.4rem, 8vw, 6rem);
+  font-weight: 900; line-height: 1.0;
+  background: linear-gradient(135deg, #fff 0%, var(--glow) 40%, var(--teal) 70%, var(--gold) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  animation: fadeUp 1s .4s both;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted2);
+  max-width: 520px; margin: 0 auto 48px;
+  animation: fadeUp 1s .6s both;
+}
+.btn-explore {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  color: #fff; padding: 16px 40px;
+  border-radius: 50px; font-size: 1rem; font-weight: 700;
+  text-decoration: none; letter-spacing: 1px;
+  box-shadow: 0 0 30px rgba(123,97,255,.4), 0 0 60px rgba(123,97,255,.15);
+  transition: transform .2s, box-shadow .2s;
+  animation: fadeUp 1s .8s both;
+  cursor: none;
+}
+.btn-explore:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 50px rgba(123,97,255,.6), 0 0 100px rgba(123,97,255,.3);
+}
+
+/* ===== SOLAR SYSTEM ===== */
+#solar {
+  position: relative; display: flex;
+  justify-content: center; align-items: center;
+  padding: 70px 0; z-index: 1; overflow: hidden;
+}
+.sun {
+  width:90px; height:90px;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #fbbf24, #f59e0b, #b45309);
+  border-radius: 50%;
+  box-shadow: 0 0 40px #fbbf24, 0 0 100px #f59e0b66, 0 0 200px #f59e0b33;
+  z-index: 10; flex-shrink: 0;
+  animation: sunPulse 4s ease-in-out infinite;
+}
+@keyframes sunPulse {
+  0%,100%{ box-shadow: 0 0 40px #fbbf24, 0 0 100px #f59e0b66; }
+  50%    { box-shadow: 0 0 70px #fbbf24, 0 0 180px #f59e0b88; }
+}
+.orbit-wrap { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }
+.orbit {
+  position:absolute; border:1px solid rgba(255,255,255,.07); border-radius:50%;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  animation: spin linear infinite;
+}
+.planet { position:absolute; border-radius:50%; top:0; left:50%; transform:translate(-50%,-50%); }
+.o1{ width:180px; height:180px; animation-duration:8s; }
+.o2{ width:280px; height:280px; animation-duration:14s; }
+.o3{ width:400px; height:400px; animation-duration:22s; }
+.o4{ width:530px; height:530px; animation-duration:36s; }
+.o5{ width:680px; height:680px; animation-duration:58s; }
+.p-mercury{ width:14px; height:14px; background:radial-gradient(circle at 35% 30%, #c8c8c8, #7a7a7a); }
+.p-venus  { width:22px; height:22px; background:radial-gradient(circle at 35% 30%, #f5e27a, #c9960e); }
+.p-earth  { width:24px; height:24px; background:radial-gradient(circle at 35% 30%, #60cfff, #1e5fb3, #2d7a4f); }
+.p-mars   { width:18px; height:18px; background:radial-gradient(circle at 35% 30%, #f87171, #b91c1c); }
+.p-jupiter{ width:50px; height:50px; background:radial-gradient(circle at 35% 30%, #e5c07b, #c49a3c); box-shadow:inset 0 5px 0 rgba(180,120,60,.5); }
+@keyframes spin {
+  from{ transform:translate(-50%,-50%) rotate(0deg); }
+  to  { transform:translate(-50%,-50%) rotate(360deg); }
+}
+.counter-spin .planet { animation: counterSpin linear infinite; animation-duration:inherit; }
+@keyframes counterSpin {
+  from{ transform:translate(-50%,-50%) rotate(0deg); }
+  to  { transform:translate(-50%,-50%) rotate(-360deg); }
+}
+
+/* ===== SHARED SECTION STYLE ===== */
+.cosmos-section { position:relative; z-index:1; }
+.div-line {
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--teal), transparent);
+  opacity:.18; margin: 0 48px;
+}
+.section-inner { max-width:1280px; margin:0 auto; padding: 90px 48px; }
+.sec-label {
+  font-family:'Orbitron',monospace;
+  font-size:.6rem; letter-spacing:6px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:12px;
+}
+.sec-title {
+  font-family:'Orbitron',monospace;
+  font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight:900;
+  margin-bottom:20px;
+}
+.sec-intro {
+  color:var(--muted2); font-size:1rem;
+  max-width:680px; margin-bottom:60px; line-height:1.9;
+}
+
+/* ===== PLANETS GRID ===== */
+#planets { position:relative; z-index:1; padding:80px 48px; max-width:1400px; margin:0 auto; }
+.section-heading {
+  font-family:'Orbitron',monospace;
+  font-size: clamp(1.6rem,4vw,2.8rem); font-weight:900; margin-bottom:48px;
+}
+.planets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 24px;
+}
+.planet-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px; padding: 32px 28px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  cursor: none; position: relative; overflow: hidden;
+}
+.planet-card::before {
+  content:''; position:absolute; inset:0; border-radius:20px;
+  background: var(--card-glow, transparent); opacity:0;
+  transition: opacity .3s; pointer-events:none;
+}
+.planet-card:hover { transform:translateY(-8px); border-color:rgba(167,139,250,.3); }
+.planet-card:hover::before { opacity:1; }
+.planet-visual {
+  width:72px; height:72px; border-radius:50%; margin-bottom:24px;
+  transition: transform .4s;
+}
+.planet-card:hover .planet-visual { transform:scale(1.1) rotate(10deg); }
+.planet-num { font-family:'Orbitron',monospace; font-size:.65rem; color:var(--muted2); letter-spacing:3px; margin-bottom:8px; }
+.planet-name { font-family:'Orbitron',monospace; font-size:1.35rem; font-weight:900; margin-bottom:12px; color:var(--white); }
+.planet-desc { font-size:.87rem; color:var(--muted2); line-height:1.8; margin-bottom:20px; }
+.planet-stats { display:flex; gap:16px; }
+.stat { display:flex; flex-direction:column; gap:2px; }
+.stat-val { font-family:'Orbitron',monospace; font-size:.88rem; font-weight:700; color:var(--white); }
+.stat-key { font-size:.68rem; color:var(--muted2); letter-spacing:1px; }
+
+/* ===== FACT STRIP ===== */
+#facts {
+  position:relative; z-index:1;
+  background: linear-gradient(135deg, rgba(123,97,255,.08), rgba(34,211,238,.05));
+  border-top: 1px solid rgba(123,97,255,.15);
+  border-bottom: 1px solid rgba(123,97,255,.15);
+  padding: 70px 48px; text-align:center;
+}
+#facts blockquote {
+  font-family:'Orbitron',monospace;
+  font-size: clamp(1rem, 3vw, 1.6rem); font-weight:700;
+  color:var(--glow); max-width:800px; margin:0 auto 12px; line-height:1.5;
+}
+#facts cite { color:var(--muted2); font-size:.8rem; font-style:normal; letter-spacing:2px; }
+
+/* ===== MILKY WAY ===== */
+#milkyway { background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,.06) 0%, transparent 70%); }
+.mw-visual {
+  position:relative; width:100%; height:280px;
+  margin-bottom:60px; border-radius:20px; overflow:hidden;
+  background:var(--space); border:1px solid var(--border);
+}
+#mw-canvas { width:100%; height:100%; }
+.mw-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:20px;
+}
+.mw-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; padding:28px 24px;
+  transition:border-color .3s, transform .3s;
+}
+.mw-card:hover { border-color:rgba(123,97,255,.3); transform:translateY(-4px); }
+.mw-icon { font-size:2rem; margin-bottom:12px; }
+.mw-card h4 { font-family:'Orbitron',monospace; font-size:.85rem; margin-bottom:10px; color:var(--glow); }
+.mw-card p  { font-size:.85rem; color:var(--muted2); line-height:1.8; }
+.mw-stat    { font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:900; color:var(--white); margin-top:8px; }
+
+/* ===== STAR EVOLUTION ===== */
+#evolution { background: radial-gradient(ellipse at 0% 50%, rgba(251,191,36,.04) 0%, transparent 60%); }
+.evo-path { position:relative; display:flex; flex-direction:column; gap:0; margin-bottom:60px; }
+.evo-branch { margin-bottom:12px; border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+.evo-branch-header {
+  display:flex; align-items:center; gap:16px; padding:18px 24px;
+  cursor:pointer; background:var(--surface); transition:background .2s; user-select:none;
+}
+.evo-branch-header:hover { background:rgba(255,255,255,.05); }
+.evo-dot { width:14px; height:14px; border-radius:50%; flex-shrink:0; box-shadow:0 0 10px currentColor; }
+.evo-branch-title { font-family:'Orbitron',monospace; font-size:.88rem; font-weight:700; flex:1; }
+.evo-toggle { color:var(--muted2); transition:transform .3s; font-size:1rem; }
+.evo-branch.open .evo-toggle { transform:rotate(180deg); }
+.evo-branch-body {
+  max-height:0; overflow:hidden; transition:max-height .5s ease, padding .3s;
+  padding:0 24px; background:rgba(0,0,0,.3);
+}
+.evo-branch.open .evo-branch-body { max-height:600px; padding:24px; }
+.evo-steps { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+.evo-step {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:8px; padding:8px 14px; font-size:.8rem; color:var(--white);
+}
+.evo-step-dot { width:8px; height:8px; border-radius:50%; }
+.evo-arr { color:var(--muted2); font-size:.9rem; }
+.evo-desc { font-size:.87rem; color:var(--muted2); line-height:1.9; }
+
+/* ===== STAR TABLE ===== */
+.stars-table { width:100%; border-collapse:collapse; margin-bottom:60px; }
+.stars-table th {
+  font-family:'Orbitron',monospace; font-size:.62rem; letter-spacing:2px;
+  color:var(--muted2); padding:12px 16px; text-align:right;
+  border-bottom:1px solid var(--border);
+}
+.stars-table td { padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.04); font-size:.85rem; vertical-align:middle; }
+.stars-table tr:hover td { background:rgba(255,255,255,.025); }
+.star-ball { display:inline-block; border-radius:50%; vertical-align:middle; margin-left:10px; }
+
+/* ===== BLACK HOLES ===== */
+#blackholes { background: radial-gradient(ellipse at 100% 100%, rgba(244,63,94,.05) 0%, transparent 60%); }
+.bh-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:24px; }
+.bh-card {
+  border-radius:20px; padding:36px 28px; position:relative; overflow:hidden;
+  border:1px solid var(--border); transition:transform .3s, box-shadow .3s;
+}
+.bh-card:hover { transform:translateY(-6px); }
+.bh-card::before {
+  content:''; position:absolute; inset:0;
+  background:var(--bh-bg,transparent); opacity:.06; pointer-events:none;
+}
+.bh-visual { width:100px; height:100px; margin:0 auto 24px; position:relative; }
+.bh-core {
+  width:100%; height:100%; border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.05), #000);
+  border:var(--bh-border);
+  box-shadow:var(--bh-shadow);
+  position:relative; overflow:hidden;
+}
+.bh-ring {
+  position:absolute; border-radius:50%; border:2px solid;
+  top:50%; left:50%; transform:translate(-50%,-50%) scaleY(.3) rotate(-30deg);
+}
+.bh-name { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; text-align:center; margin-bottom:8px; }
+.bh-sub  { font-size:.72rem; color:var(--muted2); text-align:center; letter-spacing:2px; margin-bottom:20px; }
+.bh-desc { font-size:.84rem; color:var(--muted2); line-height:1.9; }
+.bh-facts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.bh-fact {
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:6px; padding:5px 12px; font-size:.73rem; color:var(--muted2);
+}
+.bh-fact b { color:var(--white); }
+
+/* ===== NEBULA ===== */
+#nebula { background: radial-gradient(ellipse at 50% 100%, rgba(34,211,238,.04) 0%, transparent 60%); }
+.nebula-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px; }
+.neb-card {
+  border-radius:16px; padding:30px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:transform .3s;
+}
+.neb-card:hover { transform:translateY(-5px); }
+.neb-card::after {
+  content:''; position:absolute; top:-40px; right:-40px;
+  width:120px; height:120px; border-radius:50%;
+  background:var(--neb-color, rgba(123,97,255,.2));
+  filter:blur(40px); pointer-events:none;
+}
+.neb-emoji { font-size:2.2rem; margin-bottom:16px; }
+.neb-name  { font-family:'Orbitron',monospace; font-size:.88rem; font-weight:700; color:var(--white); margin-bottom:10px; }
+.neb-desc  { font-size:.83rem; color:var(--muted2); line-height:1.85; }
+
+/* ===== ASTEROID LIFE ===== */
+#asteroid-life { background: radial-gradient(ellipse at 50% 100%, rgba(251,191,36,.04) 0%, transparent 60%); }
+.asteroid-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.asteroid-card {
+  border-radius:16px; padding:28px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:all .3s;
+}
+.asteroid-card:hover { transform:translateY(-5px); border-color:rgba(251,191,36,.3); }
+.asteroid-card::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(251,191,36,.15); filter:blur(45px); pointer-events:none;
+}
+.ast-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; position:relative; z-index:1; }
+.ast-icon { font-size:2rem; }
+.ast-title { font-family:'Orbitron',monospace; font-size:.9rem; font-weight:700; color:var(--gold); }
+.ast-period { font-size:.72rem; color:var(--muted2); letter-spacing:1px; }
+.ast-desc { font-size:.83rem; color:var(--muted2); line-height:1.85; position:relative; z-index:1; }
+
+/* ===== LESSONS ===== */
+#lessons { background: radial-gradient(ellipse at 50% 100%, rgba(52,211,153,.04) 0%, transparent 60%); }
+.lessons-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.lesson-card {
+  border-radius:16px; padding:28px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:all .3s;
+}
+.lesson-card:hover { transform:translateY(-5px); border-color:rgba(52,211,153,.3); }
+.lesson-card::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(52,211,153,.15); filter:blur(45px); pointer-events:none;
+}
+.les-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; position:relative; z-index:1; }
+.les-icon { font-size:2.2rem; }
+.les-title { font-family:'Orbitron',monospace; font-size:.9rem; font-weight:700; color:var(--green); }
+.les-category { font-size:.72rem; color:var(--muted2); letter-spacing:1px; text-transform:uppercase; }
+.les-desc { font-size:.83rem; color:var(--muted2); line-height:1.85; position:relative; z-index:1; }
+
+/* ===== METEORS ===== */
+#meteors { background: radial-gradient(ellipse at 50% 100%, rgba(251,191,36,.04) 0%, transparent 60%); }
+.meteors-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.meteor-card {
+  border-radius:16px; padding:28px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:all .3s;
+}
+.meteor-card:hover { transform:translateY(-5px); border-color:rgba(251,191,36,.3); }
+.meteor-card::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(251,191,36,.15); filter:blur(45px); pointer-events:none;
+}
+.met-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; position:relative; z-index:1; }
+.met-icon { font-size:2rem; }
+.met-title { font-family:'Orbitron',monospace; font-size:.9rem; font-weight:700; color:var(--orange); }
+.met-info { font-size:.72rem; color:var(--muted2); letter-spacing:.5px; }
+.met-desc { font-size:.83rem; color:var(--muted2); line-height:1.85; position:relative; z-index:1; }
+.met-specs { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; position:relative; z-index:1; }
+.met-spec {
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:6px; padding:4px 10px; font-size:.7rem; color:var(--muted2);
+}
+.met-spec strong { color:var(--orange); }
+
+/* ===== POETRY ===== */
+#poetry { background: radial-gradient(ellipse at 50% 100%, rgba(168,85,247,.04) 0%, transparent 60%); }
+.poetry-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.poetry-card {
+  border-radius:16px; padding:28px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:all .3s;
+}
+.poetry-card:hover { transform:translateY(-5px); border-color:rgba(168,85,247,.3); }
+.poetry-card::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(168,85,247,.15); filter:blur(45px); pointer-events:none;
+}
+.po-icon { font-size:2.2rem; margin-bottom:14px; }
+.po-poet { font-family:'Orbitron',monospace; font-size:.85rem; font-weight:700; color:var(--purple); margin-bottom:8px; }
+.po-era { font-size:.7rem; color:var(--muted2); text-transform:uppercase; letter-spacing:.5px; }
+.po-verse { font-size:.82rem; color:var(--muted2); line-height:2; font-style:italic; position:relative; z-index:1; margin:14px 0; border-right:3px solid rgba(168,85,247,.3); padding-right:12px; }
+.po-desc { font-size:.78rem; color:var(--muted2); position:relative; z-index:1; line-height:1.8; }
+
+/* ===== VEGETABLES ===== */
+#vegetables { background: radial-gradient(ellipse at 50% 100%, rgba(34,197,94,.04) 0%, transparent 60%); }
+.vegetables-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+.vegetable-card {
+  border-radius:16px; padding:28px 24px;
+  border:1px solid var(--border); background:var(--surface);
+  position:relative; overflow:hidden; transition:all .3s;
+}
+.vegetable-card:hover { transform:translateY(-5px); border-color:rgba(34,197,94,.3); }
+.vegetable-card::before {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:140px; height:140px; border-radius:50%;
+  background:rgba(34,197,94,.15); filter:blur(45px); pointer-events:none;
+}
+.veg-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; position:relative; z-index:1; }
+.veg-icon { font-size:2.2rem; margin-top:2px; }
+.veg-details { flex:1; }
+.veg-name { font-family:'Orbitron',monospace; font-size:.9rem; font-weight:700; color:var(--green); margin-bottom:4px; }
+.veg-type { font-size:.7rem; color:var(--muted2); text-transform:uppercase; letter-spacing:.5px; }
+.veg-desc { font-size:.83rem; color:var(--muted2); line-height:1.85; position:relative; z-index:1; margin-bottom:14px; }
+.veg-facts { display:flex; flex-direction:column; gap:8px; position:relative; z-index:1; }
+.veg-fact { font-size:.77rem; color:var(--muted2); display:flex; align-items:flex-start; gap:8px; }
+.veg-fact strong { color:var(--green); flex-shrink:0; }
+
+/* ===== REVEAL ===== */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+/* ===== FOOTER ===== */
+footer {
+  position:relative; z-index:1;
+  text-align:center; padding:60px 48px;
+  border-top:1px solid var(--border);
+  color:var(--muted2); font-size:.82rem;
+}
+.f-logo {
+  font-family:'Orbitron',monospace; font-size:1.5rem;
+  background:linear-gradient(90deg,var(--glow),var(--teal));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:12px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+  nav { padding:14px 20px; }
+  nav ul { display:none; }
+  #planets { padding:60px 20px; }
+  #solar { height:340px; }
+  .o4,.o5 { display:none; }
+  #cursor,#cursor-ring { display:none; }
+  body { cursor:auto; }
+  .btn-explore { cursor:pointer; }
+  .section-inner { padding:70px 20px; }
+  .div-line { margin:0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- STARS -->
+<canvas id="stars-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">✦ COSMOS</div>
+  <ul>
+    <li><a href="#hero">الرئيسية</a></li>
+    <li><a href="#planets">الكواكب</a></li>
+    <li><a href="#milkyway">درب التبان</a></li>
+    <li><a href="#evolution">النجوم</a></li>
+    <li><a href="#blackholes">الثقوب السوداء</a></li>
+    <li><a href="#nebula">السدم</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🚀 موسوعة الكون الشاملة</div>
+    <h1 class="hero-title">المجموعة<br>الشمسية<br>والكون</h1>
+    <p class="hero-sub">من الكواكب إلى الثقوب السوداء — رحلة بصرية وعلمية في أسرار الكون اللانهائي</p>
+    <a href="#planets" class="btn-explore">استكشف الآن ✦</a>
+  </div>
+</section>
+
+<!-- SOLAR SYSTEM -->
+<section id="solar">
+  <div class="sun"></div>
+  <div class="orbit-wrap">
+    <div class="orbit o1 counter-spin"><div class="planet p-mercury"></div></div>
+    <div class="orbit o2 counter-spin"><div class="planet p-venus"></div></div>
+    <div class="orbit o3 counter-spin"><div class="planet p-earth"></div></div>
+    <div class="orbit o4 counter-spin"><div class="planet p-mars"></div></div>
+    <div class="orbit o5 counter-spin"><div class="planet p-jupiter"></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ PLANETS ═══════════════ -->
+<section id="planets">
+  <p class="section-title" style="font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:6px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;">✦ النظام الشمسي</p>
+  <h2 class="section-heading">الكواكب الثمانية</h2>
+  <div class="planets-grid" id="planetsGrid"></div>
+</section>
+
+
+<!-- ═══════════════ MILKY WAY ═══════════════ -->
+<div class="div-line"></div>
+<section id="milkyway" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ مجرتنا</p>
+    <h2 class="sec-title reveal">درب التبان</h2>
+    <p class="sec-intro reveal">درب التبان هي المجرة التي يقع فيها نظامنا الشمسي — مجرة حلزونية شريطية عمرها حوالي 13.6 مليار سنة، تحتوي على ما بين 100 و400 مليار نجم، وقطرها يتراوح بين 100,000 و200,000 سنة ضوئية.</p>
+    <div class="mw-visual reveal"><canvas id="mw-canvas"></canvas></div>
+    <div class="mw-grid">
+      <div class="mw-card reveal"><div class="mw-icon">🌀</div><h4>الشكل والبنية</h4><p>مجرة حلزونية شريطية (SBbc) بأربعة أذرع رئيسية: ذراع الجبار، ذراع قنطورس، ذراع البجعة، وذراع الدرع.</p></div>
+      <div class="mw-card reveal"><div class="mw-icon">⚫</div><h4>المركز الغامض</h4><p>في قلب المجرة ثقب أسود هائل يُعرف بـ <b>القوس أ*</b> — كتلته تعادل 4 ملايين كتلة شمسية.</p><div class="mw-stat">4,000,000 ☀️</div></div>
+      <div class="mw-card reveal"><div class="mw-icon">🔭</div><h4>موقع الشمس</h4><p>شمسنا تقع على بُعد 26,000 سنة ضوئية من مركز المجرة في ذراع الجبار، وتدور حول المركز كل 225 مليون سنة.</p><div class="mw-stat">26,000 سنة ضوئية</div></div>
+      <div class="mw-card reveal"><div class="mw-icon">🌌</div><h4>المادة المظلمة</h4><p>تشكّل المادة المظلمة حوالي 85% من كتلة المجرة — لا نراها لكنها تُحكم قبضتها على بنية الكون.</p></div>
+      <div class="mw-card reveal"><div class="mw-icon">💫</div><h4>عدد النجوم</h4><p>تضم المجرة ما بين 100 و400 مليار نجم — لو حاولت عدّها بمعدل نجم في الثانية لاحتجت أكثر من 3000 سنة.</p><div class="mw-stat">~250 مليار نجم</div></div>
+      <div class="mw-card reveal"><div class="mw-icon">🛸</div><h4>المجرات المجاورة</h4><p>أقرب مجرة كبيرة لنا هي أندروميدا، على بُعد 2.5 مليون سنة ضوئية، وستصطدم بدرب التبان بعد 4.5 مليار سنة!</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STAR EVOLUTION ═══════════════ -->
+<div class="div-line"></div>
+<section id="evolution" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ دورة الحياة</p>
+    <h2 class="sec-title reveal">تطور النجوم</h2>
+    <p class="sec-intro reveal">تُولد النجوم من سحب غازية وتموت في انفجارات مذهلة — والمسار يعتمد كلياً على الكتلة الابتدائية للنجم.</p>
+    <div class="reveal" style="overflow-x:auto;margin-bottom:50px;">
+      <table class="stars-table">
+        <thead>
+          <tr><th>النوع</th><th>اللون</th><th>الحرارة (ك)</th><th>الكتلة ☀️</th><th>العمر التقريبي</th><th>مثال</th></tr>
+        </thead>
+        <tbody id="star-table-body"></tbody>
+      </table>
+    </div>
+    <h3 class="reveal" style="font-family:'Orbitron',monospace;font-size:.9rem;color:var(--muted2);letter-spacing:2px;margin-bottom:20px;">مسارات التطور حسب الكتلة</h3>
+    <div class="evo-path reveal" id="evo-container"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ BLACK HOLES ═══════════════ -->
+<div class="div-line"></div>
+<section id="blackholes" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ التشوه الزمكاني</p>
+    <h2 class="sec-title reveal">الثقوب السوداء</h2>
+    <p class="sec-intro reveal">منطقة في الفضاء كثافتها لا نهائية، وجاذبيتها تبتلع حتى الضوء. لا شيء يفر من أفق الحدث — ولا حتى الزمن.</p>
+    <div class="bh-grid" id="bh-container"></div>
+    <div class="mw-grid" style="margin-top:40px;">
+      <div class="mw-card reveal"><div class="mw-icon">🌊</div><h4>أفق الحدث</h4><p>الحدود التي إذا تجاوزتها لا يمكنك العودة. السرعة اللازمة للهروب تتجاوز سرعة الضوء (300,000 كم/ث).</p></div>
+      <div class="mw-card reveal"><div class="mw-icon">🌡️</div><h4>إشعاع هوكينج</h4><p>نظرياً، الثقوب السوداء تتبخر ببطء شديد عبر إشعاع حراري كمي اكتشفه ستيفن هوكينج عام 1974.</p></div>
+      <div class="mw-card reveal"><div class="mw-icon">⏱️</div><h4>تمدد الزمن</h4><p>قرب أفق الحدث، يتباطأ الزمن بشكل قياسي. ثانية واحدة عند الأفق قد تعادل سنوات بعيداً عنه.</p></div>
+      <div class="mw-card reveal"><div class="mw-icon">📡</div><h4>أول صورة حقيقية</h4><p>عام 2019 التقط مشروع EHT أول صورة لثقب أسود — M87* — كتلته 6.5 مليار ضعف كتلة الشمس.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEBULA ═══════════════ -->
+<div class="div-line"></div>
+<section id="nebula" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ مهود النجوم</p>
+    <h2 class="sec-title reveal">السدم والأجرام الكونية</h2>
+    <p class="sec-intro reveal">السدم هي سحب ضخمة من الغاز والغبار — بعضها مكان ميلاد النجوم، وبعضها رماد النجوم الميتة.</p>
+    <div class="nebula-grid" id="nebula-container"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ ASTEROID LIFE ═══════════════ -->
+<div class="div-line"></div>
+<section id="asteroid-life" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ الصخور الضائعة</p>
+    <h2 class="sec-title reveal">حياة الكويكبات عبر الزمن</h2>
+    <p class="sec-intro reveal">الكويكبات ليست مجرد صخور خاملة، بل لها تاريخ درامي ودور حاسم في تشكيل المجموعة الشمسية.</p>
+    <div class="asteroid-grid" id="asteroid-container"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ LESSONS ═══════════════ -->
+<div class="div-line"></div>
+<section id="lessons" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ الحكمة الكونية</p>
+    <h2 class="sec-title reveal">دروس من الكون العظيم</h2>
+    <p class="sec-intro reveal">الكون يعلمنا دروساً عميقة عن الحياة والوجود والتواضع الإنساني.</p>
+    <div class="lessons-grid" id="lessons-container"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ METEORS ═══════════════ -->
+<div class="div-line"></div>
+<section id="meteors" class="cosmos-section">
+  <div class="section-inner">
+    <p class="sec-label reveal">✦ زوار من الفضاء</p>
+    <h2 class="sec-title reveal">الشهب والنيازك — الضيوف القادمون</h2>
+    <p class="sec-intro reveal">أحجار فضائية تهبط على الأرض بسرعة خاطفة، مخلفة أضواءً عظيمة في السماء. بعضها يصل الأرض، وبعضها يحترق في الغلاف الجوي.</p>
+    <div class="meteors-grid" id="meteors-container"></div>
+  </div>
+</section>
+
+
+<!-- QUOTE STRIP -->
+<section id="facts">
+  <blockquote>"الكون لا يُقاس بالكيلومترات، بل بالخيال الإنساني الذي يجرؤ على النظر نحو النجوم"</blockquote>
+  <cite>— علم الفلك</cite>
+</section>
+
+<!-- FOOTER -->
+<div class="div-line"></div>
+<footer>
+  <div class="f-logo">✦ COSMOS</div>
+  <p style="margin-top:8px;">موسوعة علمية وبصرية للكون الواسع — صُنع بالخيال والعلم </p>
+</footer>
+
+<script>
+/* ===== STARS ===== */
+const canvas = document.getElementById('stars-canvas');
+const ctx    = canvas.getContext('2d');
+let stars = [];
+function initStars(){
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = Array.from({length:260}, ()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5+.3,
+    a:Math.random(),
+    sp:Math.random()*.007+.002,
+    dir:Math.random()>.5?1:-1
+  }));
+}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    s.a+=s.sp*s.dir;
+    if(s.a>=1||s.a<=.1) s.dir*=-1;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${s.a})`; ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+initStars(); drawStars();
+window.addEventListener('resize', initStars);
+
+/* ===== CURSOR ===== */
+const cur  = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
+function animCursor(){
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+/* ===== PLANETS DATA ===== */
+const planetsData = [
+  { num:'01', name:'عطارد',  nameEn:'Mercury', color:'radial-gradient(circle at 35% 30%,#d4d4d4,#6b7280)', shadow:'0 0 30px rgba(156,163,175,.4)', glow:'rgba(156,163,175,.12)', desc:'أصغر كوكب في المجموعة الشمسية وأقربها للشمس. درجات حرارته تتذبذب بشكل مذهل بين الليل والنهار.', stats:[{v:'88 يوم',k:'السنة'},{v:'167°م',k:'الحرارة'},{v:'0 قمر',k:'الأقمار'}], delay:0 },
+  { num:'02', name:'الزهرة', nameEn:'Venus',   color:'radial-gradient(circle at 35% 30%,#fef3c7,#d97706)', shadow:'0 0 30px rgba(217,119,6,.5)',   glow:'rgba(251,191,36,.12)',  desc:'أشد كواكب المجموعة حرارةً رغم بُعده عن الشمس. غلافه الجوي الكثيف يحبس الحرارة كالفرن.',         stats:[{v:'225 يوم',k:'السنة'},{v:'464°م',k:'الحرارة'},{v:'0 قمر',k:'الأقمار'}], delay:.1 },
+  { num:'03', name:'الأرض',  nameEn:'Earth',   color:'radial-gradient(circle at 35% 30%,#7dd3fc,#1d4ed8,#166534)', shadow:'0 0 30px rgba(29,78,216,.5)', glow:'rgba(96,165,250,.12)', desc:'كوكبنا الجميل، الوحيد الذي يرعى الحياة في الكون المعروف. 71% من سطحه محاط بالمياه.',         stats:[{v:'365 يوم',k:'السنة'},{v:'15°م',k:'الحرارة'},{v:'1 قمر',k:'الأقمار'}], delay:.2 },
+  { num:'04', name:'المريخ', nameEn:'Mars',    color:'radial-gradient(circle at 35% 30%,#fca5a5,#dc2626)', shadow:'0 0 30px rgba(220,38,38,.5)',   glow:'rgba(248,113,113,.12)', desc:'الكوكب الأحمر الذي يحلم البشر باستيطانه. يحتوي على جبل أوليمبوس، أعلى جبل في المجموعة.',    stats:[{v:'687 يوم',k:'السنة'},{v:'-60°م',k:'الحرارة'},{v:'2 قمر',k:'الأقمار'}], delay:.3 },
+  { num:'05', name:'المشتري',nameEn:'Jupiter', color:'radial-gradient(circle at 35% 30%,#fde68a,#b45309,#92400e)', shadow:'0 0 30px rgba(180,83,9,.5)', glow:'rgba(245,158,11,.12)', desc:'عملاق الغاز ملك الكواكب. بقعته الحمراء العظيمة عاصفة مستمرة منذ أكثر من 350 سنة.',           stats:[{v:'12 سنة',k:'السنة'},{v:'-110°م',k:'الحرارة'},{v:'95 قمر',k:'الأقمار'}], delay:.4 },
+  { num:'06', name:'زحل',    nameEn:'Saturn',  color:'radial-gradient(circle at 35% 30%,#fef3c7,#ca8a04)', shadow:'0 0 30px rgba(202,138,4,.5)',   glow:'rgba(251,191,36,.12)',  desc:'صاحب الحلقات الرائعة المصنوعة من الجليد والصخور. كثافته أقل من الماء — سيطفو لو وجد محيطاً!', stats:[{v:'29 سنة',k:'السنة'},{v:'-140°م',k:'الحرارة'},{v:'146 قمر',k:'الأقمار'}], delay:.5 },
+  { num:'07', name:'أورانوس',nameEn:'Uranus',  color:'radial-gradient(circle at 35% 30%,#a5f3fc,#0891b2)', shadow:'0 0 30px rgba(8,145,178,.5)',   glow:'rgba(34,211,238,.12)',  desc:'الكوكب المائل الغريب الذي يدور على جانبه. يتميز بلونه الأزرق الفيروزي الجميل.',              stats:[{v:'84 سنة',k:'السنة'},{v:'-195°م',k:'الحرارة'},{v:'28 قمر',k:'الأقمار'}], delay:.6 },
+  { num:'08', name:'نبتون',  nameEn:'Neptune', color:'radial-gradient(circle at 35% 30%,#818cf8,#1e3a8a)', shadow:'0 0 30px rgba(30,58,138,.5)',   glow:'rgba(129,140,248,.12)', desc:'أبعد كوكب في المجموعة الشمسية. رياحه الأقوى في الكون تبلغ 2100 كم/ساعة.',                     stats:[{v:'165 سنة',k:'السنة'},{v:'-200°م',k:'الحرارة'},{v:'16 قمر',k:'الأقمار'}], delay:.7 }
+];
+
+const grid = document.getElementById('planetsGrid');
+planetsData.forEach(p=>{
+  const card = document.createElement('div');
+  card.className='planet-card';
+  card.style.cssText=`--card-glow:${p.glow}; animation-delay:${p.delay}s`;
+  card.innerHTML=`
+    <div class="planet-visual" style="background:${p.color};box-shadow:${p.shadow}"></div>
+    <p class="planet-num">${p.num} — ${p.nameEn.toUpperCase()}</p>
+    <h3 class="planet-name">${p.name}</h3>
+    <p class="planet-desc">${p.desc}</p>
+    <div class="planet-stats">
+      ${p.stats.map(s=>`<div class="stat"><span class="stat-val">${s.v}</span><span class="stat-key">${s.k}</span></div>`).join('')}
+    </div>`;
+  grid.appendChild(card);
+});
+
+/* ===== SCROLL REVEAL (planets) ===== */
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; }
+  });
+},{threshold:.1});
+document.querySelectorAll('.planet-card').forEach(c=>{
+  c.style.opacity=0; c.style.transform='translateY(30px)';
+  c.style.transition='opacity .7s ease, transform .7s ease';
+  revealObs.observe(c);
+});
+
+/* ===== MILKY WAY CANVAS ===== */
+(function(){
+  const c=document.getElementById('mw-canvas');
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  function resize(){ c.width=c.offsetWidth; c.height=c.offsetHeight; draw(); }
+  function draw(){
+    const W=c.width,H=c.height,cx=W/2,cy=H/2;
+    ctx.clearRect(0,0,W,H);
+    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*.45);
+    g.addColorStop(0,'rgba(255,240,200,.35)'); g.addColorStop(.3,'rgba(180,160,255,.12)');
+    g.addColorStop(.7,'rgba(80,100,200,.05)'); g.addColorStop(1,'transparent');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    for(let a=0;a<4;a++){
+      const base=(a/4)*Math.PI*2;
+      for(let i=0;i<600;i++){
+        const t=i/600, angle=base+t*Math.PI*3;
+        const r=t*Math.min(W,H)*.48;
+        const sp=(Math.random()-.5)*22*(1+t*2);
+        const x=cx+Math.cos(angle)*r+Math.cos(angle+Math.PI/2)*sp;
+        const y=cy+Math.sin(angle)*r*.42+Math.sin(angle+Math.PI/2)*sp*.42;
+        const br=Math.random();
+        ctx.beginPath(); ctx.arc(x,y,Math.random()*1.2+.2,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${200+Math.floor(br*55)},${180+Math.floor(br*75)},240,${.15+br*.55})`;
+        ctx.fill();
+      }
+    }
+    const core=ctx.createRadialGradient(cx,cy,0,cx,cy,40);
+    core.addColorStop(0,'rgba(255,255,220,.9)'); core.addColorStop(.3,'rgba(255,220,120,.4)'); core.addColorStop(1,'transparent');
+    ctx.fillStyle=core; ctx.fillRect(0,0,W,H);
+  }
+  resize(); window.addEventListener('resize',resize);
+})();
+
+/* ===== STAR TABLE ===== */
+const starTypes=[
+  {type:'O',color:'#93c5fd',temp:'30,000–50,000',mass:'≥ 16',  life:'~10 مليون سنة',   ex:'منقب الجوزاء ζ',hex:'#bfdbfe'},
+  {type:'B',color:'#bfdbfe',temp:'10,000–30,000',mass:'2–16',  life:'~100 مليون سنة',  ex:'رجل الجوزاء',   hex:'#dbeafe'},
+  {type:'A',color:'#e0f2fe',temp:'7,500–10,000', mass:'1.4–2', life:'~1 مليار سنة',    ex:'الشعرى اليمانية',hex:'#f0f9ff'},
+  {type:'F',color:'#fef9c3',temp:'6,000–7,500',  mass:'1–1.4', life:'~3 مليار سنة',    ex:'القيس β',       hex:'#fef9c3'},
+  {type:'G',color:'#fde68a',temp:'5,200–6,000',  mass:'0.8–1', life:'~10 مليار سنة',   ex:'الشمس ☀️',      hex:'#fde68a'},
+  {type:'K',color:'#fdba74',temp:'3,700–5,200',  mass:'0.5–0.8',life:'~30 مليار سنة',  ex:'العواء α',      hex:'#fed7aa'},
+  {type:'M',color:'#fca5a5',temp:'2,400–3,700',  mass:'0.08–0.5',life:'~100 مليار سنة',ex:'بروكسيما',      hex:'#fecaca'},
+];
+const tbody=document.getElementById('star-table-body');
+starTypes.forEach(s=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td><b style="font-family:'Orbitron',monospace;color:${s.hex}">${s.type}</b></td>
+    <td><span class="star-ball" style="width:14px;height:14px;background:${s.color};box-shadow:0 0 8px ${s.color}"></span> ${s.color}</td>
+    <td style="font-family:'Orbitron',monospace;font-size:.78rem">${s.temp}</td>
+    <td style="color:var(--muted2)">${s.mass} ☀️</td>
+    <td style="color:var(--muted2)">${s.life}</td>
+    <td style="color:var(--teal)">${s.ex}</td>`;
+  tbody.appendChild(tr);
+});
+
+/* ===== EVO PATHS ===== */
+const evoPaths=[
+  { title:'نجوم خفيفة الكتلة (< 0.5 كتلة شمسية)', color:'#f87171',
+    steps:[{label:'سحابة جزيئية',c:'#94a3b8'},{label:'نجم أولي',c:'#fdba74'},{label:'قزم أحمر',c:'#f87171'},{label:'قزم أبيض (بطيء)',c:'#e2e8f0'}],
+    desc:'تحترق هذه النجوم ببطء شديد لدرجة أن عمرها يتجاوز عمر الكون الحالي! لم ينتهِ أي منها بعد. تتحول تدريجياً إلى أقزام بيضاء دون أن تمر بمرحلة العملاق.' },
+  { title:'نجوم متوسطة الكتلة (0.5 – 8 كتلة شمسية)', color:'#fbbf24',
+    steps:[{label:'سحابة جزيئية',c:'#94a3b8'},{label:'نجم رئيسي',c:'#fbbf24'},{label:'عملاق أحمر',c:'#f97316'},{label:'سديم كوكبي',c:'#c084fc'},{label:'قزم أبيض',c:'#e2e8f0'}],
+    desc:'مسار شمسنا الحالية. بعد نحو 5 مليار سنة ستتمدد الشمس لتبتلع كوكبي عطارد والزهرة وربما الأرض، ثم تُلقي طبقاتها الخارجية لتشكّل سديماً كوكبياً جميل، وتبقى النواة قزماً أبيض.' },
+  { title:'نجوم ضخمة الكتلة (8 – 20 كتلة شمسية)', color:'#60a5fa',
+    steps:[{label:'سحابة جزيئية',c:'#94a3b8'},{label:'نجم أزرق',c:'#60a5fa'},{label:'عملاق أحمر فائق',c:'#fb923c'},{label:'مستعر أعظم 💥',c:'#fbbf24'},{label:'نجم نيوتروني',c:'#a78bfa'}],
+    desc:'تنتهي حياتها بانفجار ضخم يُضيء المجرة كلها لأسابيع — المستعر الأعظم (Supernova). ما يتبقى هو نجم نيوتروني بكثافة مجنونة: ملعقة صغيرة منه تزن مليار طن!' },
+  { title:'نجوم شديدة الضخامة (> 20 كتلة شمسية)', color:'#c084fc',
+    steps:[{label:'سحابة جزيئية',c:'#94a3b8'},{label:'نجم O أزرق',c:'#bfdbfe'},{label:'عملاق أزرق/أحمر',c:'#fb923c'},{label:'مستعر أعظم فائق 💥',c:'#fbbf24'},{label:'ثقب أسود نجمي ⚫',c:'#1e1b4b'}],
+    desc:'الكتلة الهائلة تجعل نواة النجم تنهار على نفسها بعد الانفجار الأعظم لتشكّل ثقباً أسود — تشوّه الزمكان واحتجاز الضوء للأبد.' }
+];
+const evoContainer=document.getElementById('evo-container');
+evoPaths.forEach(path=>{
+  const div=document.createElement('div');
+  div.className='evo-branch';
+  div.innerHTML=`
+    <div class="evo-branch-header" onclick="toggleEvo(this)">
+      <div class="evo-dot" style="background:${path.color}"></div>
+      <span class="evo-branch-title" style="color:${path.color}">${path.title}</span>
+      <span class="evo-toggle">▼</span>
+    </div>
+    <div class="evo-branch-body">
+      <div class="evo-steps">
+        ${path.steps.map((s,j)=>`${j>0?'<span class="evo-arr">←</span>':''}<div class="evo-step"><div class="evo-step-dot" style="background:${s.c}"></div>${s.label}</div>`).join('')}
+      </div>
+      <p class="evo-desc">${path.desc}</p>
+    </div>`;
+  evoContainer.appendChild(div);
+});
+function toggleEvo(header){ header.parentElement.classList.toggle('open'); }
+setTimeout(()=>evoContainer.querySelector('.evo-branch .evo-branch-header').click(), 500);
+
+/* ===== BLACK HOLES ===== */
+const bhData=[
+  { name:'الثقب الأسود النجمي',   sub:'STELLAR BLACK HOLE',        color:'#f43f5e', bh_bg:'radial-gradient(circle,#f43f5e,transparent)', border:'2px solid rgba(244,63,94,.3)',    shadow:'0 0 40px rgba(244,63,94,.5),0 0 80px rgba(244,63,94,.2)',    ringColor:'rgba(244,63,94,.6)',    desc:'يتشكّل من انهيار نجم ضخم بعد انفجار المستعر الأعظم. كتلته بين 3 و 100 كتلة شمسية. يُقدّر وجود مئات الملايين منها في درب التبان.', facts:[{k:'الكتلة',v:'3–100 ☀️'},{k:'القطر',v:'6–600 كم'},{k:'الأصل',v:'انهيار نجمي'}] },
+  { name:'الثقب الأسود المتوسط',   sub:'INTERMEDIATE BLACK HOLE',   color:'#a78bfa', bh_bg:'radial-gradient(circle,#a78bfa,transparent)', border:'2px solid rgba(167,139,250,.3)', shadow:'0 0 40px rgba(167,139,250,.5),0 0 80px rgba(167,139,250,.2)', ringColor:'rgba(167,139,250,.6)', desc:'نوع نادر وغامض يقع بين النجمي والهائل في الحجم. يُعتقد أنها تتشكل في عناقيد النجوم الكروية. اكتُشف أول نموذج محقق منها عام 2020.', facts:[{k:'الكتلة',v:'100–100,000 ☀️'},{k:'الحالة',v:'نادر جداً'},{k:'الاكتشاف',v:'2020'}] },
+  { name:'الثقب الأسود الهائل',    sub:'SUPERMASSIVE BLACK HOLE',   color:'#22d3ee', bh_bg:'radial-gradient(circle,#22d3ee,transparent)', border:'2px solid rgba(34,211,238,.3)',  shadow:'0 0 40px rgba(34,211,238,.5),0 0 80px rgba(34,211,238,.2)',  ringColor:'rgba(34,211,238,.6)',  desc:'موجود في مركز كل مجرة كبيرة تقريباً. ثقب مجرتنا (القوس أ*) كتلته 4 ملايين ضعف الشمس، وثقب M87 يتجاوز 6.5 مليار كتلة شمسية.', facts:[{k:'الكتلة',v:'مليون – مليار ☀️'},{k:'الموقع',v:'مراكز المجرات'},{k:'مثال',v:'القوس أ*'}] },
+  { name:'الثقب الأسود البدائي',   sub:'PRIMORDIAL BLACK HOLE',     color:'#fbbf24', bh_bg:'radial-gradient(circle,#fbbf24,transparent)', border:'2px solid rgba(251,191,36,.3)',  shadow:'0 0 40px rgba(251,191,36,.5),0 0 80px rgba(251,191,36,.2)',  ringColor:'rgba(251,191,36,.6)',  desc:'نظرية تقول إن ثقوباً سوداء صغيرة تشكّلت في اللحظات الأولى بعد الانفجار العظيم. بعضها قد يكون مصدراً للمادة المظلمة الغامضة.', facts:[{k:'الكتلة',v:'متغيرة جداً'},{k:'الأصل',v:'الانفجار العظيم'},{k:'الحالة',v:'نظري'}] }
+];
+const bhContainer=document.getElementById('bh-container');
+bhData.forEach(bh=>{
+  const div=document.createElement('div');
+  div.className='bh-card reveal';
+  div.style.cssText=`--bh-bg:${bh.bh_bg};--bh-border:${bh.border};--bh-shadow:${bh.shadow}`;
+  div.innerHTML=`
+    <div class="bh-visual">
+      <div class="bh-core" style="border:${bh.border};box-shadow:${bh.shadow}">
+        <div class="bh-ring" style="width:130%;height:130%;border-color:${bh.ringColor};opacity:.7;filter:blur(1px)"></div>
+        <div class="bh-ring" style="width:160%;height:160%;border-color:${bh.ringColor};opacity:.3"></div>
+      </div>
+    </div>
+    <h3 class="bh-name" style="color:${bh.color}">${bh.name}</h3>
+    <p class="bh-sub">${bh.sub}</p>
+    <p class="bh-desc">${bh.desc}</p>
+    <div class="bh-facts">${bh.facts.map(f=>`<div class="bh-fact"><b>${f.k}:</b> ${f.v}</div>`).join('')}</div>`;
+  bhContainer.appendChild(div);
+});
+
+/* ===== NEBULA ===== */
+const nebulaData=[
+  {emoji:'🌈',name:'السديم الانبعاثي',  color:'rgba(244,63,94,.3)',   desc:'سحابة غاز مضيء يُضيئها نجم ساخن مجاور. يُعدّ من أجمل الظواهر الكونية. مثال: سديم العقاب وسديم اللاكون.'},
+  {emoji:'🔵',name:'السديم الانعكاسي', color:'rgba(96,165,250,.3)',   desc:'سحابة غبار تعكس ضوء نجم قريب دون إنتاج ضوئها الخاص. يظهر عادة بلون أزرق بارد. مثال: سديم الثريا.'},
+  {emoji:'⚫',name:'السديم المعتم',     color:'rgba(100,116,139,.3)', desc:'سحابة كثيفة من الغبار تحجب الضوء خلفها. مثاله الشهير "رأس الحصان" في كوكبة الجبار.'},
+  {emoji:'💠',name:'السديم الكوكبي',   color:'rgba(167,139,250,.3)', desc:'بقايا نجم متوسط الكتلة مات وطرح طبقاته الخارجية. سمّي "كوكبياً" خطأً لأنه يشبه الكواكب بالتلسكوب.'},
+  {emoji:'💥',name:'بقايا المستعر',     color:'rgba(251,191,36,.3)',  desc:'حطام انفجار نجم ضخم بعد المستعر الأعظم، يتمدد بسرعة هائلة. مثال: سديم السرطان — انفجر عام 1054 وشاهده العرب.'},
+  {emoji:'🌱',name:'سديم تشكّل النجوم',color:'rgba(52,211,153,.3)',  desc:'مناطق في المجرة تنهار فيها سحب الغاز بفعل الجاذبية لتوّلد نجوماً جديدة. مثال: سديم الجبار — مهد لنجوم شابة.'},
+];
+const nebContainer=document.getElementById('nebula-container');
+nebulaData.forEach(n=>{
+  const div=document.createElement('div');
+  div.className='neb-card reveal';
+  div.style.setProperty('--neb-color',n.color);
+  div.innerHTML=`<div class="neb-emoji">${n.emoji}</div><h4 class="neb-name">${n.name}</h4><p class="neb-desc">${n.desc}</p>`;
+  nebContainer.appendChild(div);
+});
+
+/* ===== ASTEROID LIFE ===== */
+const asteroidData=[
+  { icon:'🌋', title:'التكوين (قبل 4.6 مليار سنة)', period:'عصر النظام الشمسي الأول', desc:'تشكّلت الكويكبات من بقايا قرص المواد حول الشمس الفتية. كانت كثيفة جداً وتقلصت بسبب الجاذبية، لكن لم يكن لديها كتلة كافية لتصبح كواكب.' },
+  { icon:'💥', title:'الهجرة والاصطدامات (4.6-3.8 مليار سنة)', period:'عصر القصف الثقيل', desc:'هاجرت الكواكب الضخمة وقذفت آلاف الكويكبات. كان هناك "القصف الثقيل" حيث اصطدمت الكويكبات بالكواكب الفتية وشكّلت فوهاتها.' },
+  { icon:'❄️', title:'البقاء في حزام الكويكبات (3.8 مليار سنة - الآن)', period:'الحاضر', desc:'استقرت معظم الكويكبات في حزام بين المريخ والمشتري. تدور بهدوء حول الشمس، بينما أرسلت بعضها نحو الداخل قرب الأرض.' },
+  { icon:'🌍', title:'الاصطدام بالأرض (منذ ملايين السنة حتى الآن)', period:'ماضٍ وحاضر', desc:'اصطدمت الكويكبات بالأرض عبر تاريخها — أشهرها اصطدام تشيكشولوب قبل 66 مليون سنة الذي أباد الديناصورات.' },
+  { icon:'🛸', title:'الاستخدام العلمي (الآن)', period:'الحاضر والمستقبل', desc:'ترسل البشرية مسابير للكويكبات لدراسة تكوين النظام الشمسي والبحث عن موارد محتملة. قد تصبح محطات تزود للرحلات الفضائية.' },
+];
+const astContainer=document.getElementById('asteroid-container');
+asteroidData.forEach(a=>{
+  const div=document.createElement('div');
+  div.className='asteroid-card reveal';
+  div.innerHTML=`
+    <div class="ast-header">
+      <div class="ast-icon">${a.icon}</div>
+      <div>
+        <div class="ast-title">${a.title}</div>
+        <div class="ast-period">${a.period}</div>
+      </div>
+    </div>
+    <p class="ast-desc">${a.desc}</p>`;
+  astContainer.appendChild(div);
+});
+
+/* ===== LESSONS ===== */
+const lessonsData=[
+  { icon:'🌌', title:'الضآلة الإنسانية', category:'الواقعية', desc:'عندما تنظر إلى النجوم وتدرك أن شمسنا نجم عادي بين 400 مليار نجم في مجرتنا وحدها، وهناك 200 مليار مجرة أخرى... تفهم حقاً معنى الصغر.' },
+  { icon:'⏳', title:'عبور الزمن', category:'الفلسفة', desc:'النور الذي تراه من نجم بعيد قد يكون قد سافر لملايين السنين. أنت ترى الماضي حرفياً — الكون أشبه بآلة زمن حية.' },
+  { icon:'♻️', title:'الدورة الحتمية', category:'الفيزياء', desc:'النجوم تُولد من غبار وتموت في انفجارات، مما يخلق غباراً جديداً للنجوم القادمة. كل ذرة في جسدك كانت ذات مرة داخل نجم ميت.' },
+  { icon:'🤝', title:'الوحدة الكونية', category:'الروح', desc:'كل حضارة بشرية نظرت إلى النجوم وتساءلت نفس الأسئلة. الكون يجمع البشرية تحت سقف واحد — تذكر بأننا أطفال كوكب واحد صغير.' },
+  { icon:'🔬', title:'العلم كرحلة', category:'المعرفة', desc:'كل ما فهمناه عن الكون جاء من الفضول والملاحظة والتجربة. لا توجد إجابة نهائية — هناك دائماً سؤال جديد ينتظر.' },
+  { icon:'🎨', title:'الجمال في الكون', category:'الجمالية', desc:'الكون لا يُقدّر بالأرقام وحدها. سديم الجبار، حلقات زحل، الثقب الأسود — كل ذلك فن بصري مذهل يذكرنا بأن الطبيعة أعظم فنان.' },
+];
+const lesContainer=document.getElementById('lessons-container');
+lessonsData.forEach(l=>{
+  const div=document.createElement('div');
+  div.className='lesson-card reveal';
+  div.innerHTML=`
+    <div class="les-header">
+      <div class="les-icon">${l.icon}</div>
+      <div>
+        <div class="les-title">${l.title}</div>
+        <div class="les-category">⚬ ${l.category}</div>
+      </div>
+    </div>
+    <p class="les-desc">${l.desc}</p>`;
+  lesContainer.appendChild(div);
+});
+
+/* ===== METEORS ===== */
+const meteorsData=[
+  { icon:'⚡', title:'الشهاب (Meteor)', info:'شهب حرارية', 
+    desc:'صخور صغيرة من الفضاء تدخل الغلاف الجوي وتحترق من الاحتكاك بالهواء. تخلق خطوط ضوء جميلة تسمى "نجوم ساقطة" رغم أنها ليست نجوماً.',
+    specs:[{k:'الحجم',v:'1 مم - 1 متر'},{k:'السرعة',v:'11-72 كم/ثانية'},{k:'المصدر',v:'بقايا المذنبات'},{k:'الحرارة',v:'1600-2000 درجة'}] },
+  
+  { icon:'🌠', title:'نيزك (Meteorite)', info:'صخرة نجاحت', 
+    desc:'جزء من نيزك لم يحترق بالكامل في الغلاف الجوي ووصل سطح الأرض. تتفاوت أوزانها من غرامات إلى أطنان. أثقل نيزك موجود هو "هوبا" بـ 60 طناً.',
+    specs:[{k:'الحد الأدنى',v:'1 سنتيمتر'},{k:'أثقل النيازك',v:'هوبا - 60 طن'},{k:'العمر',v:'4.5 مليار سنة'},{k:'الأنواع',v:'حديد، حجر، هجين'}] },
+  
+  { icon:'🔥', title:'الكويكب الصغير (Asteroid)', info:'صخرة فضائية كبيرة', 
+    desc:'كويكب أكبر من متر واحد لكن لم يصل حجماً كافياً ليكون "كوكباً قزماً". يدور معظمها في حزام الكويكبات بين المريخ والمشتري.',
+    specs:[{k:'الحجم',v:'أكبر من 1 متر'},{k:'الأصل',v:'بقايا النظام الشمسي'},{k:'العدد',v:'ملايين'},{k:'أكبرها',v:'سيريس - 940 كم'}] },
+  
+  { icon:'☄️', title:'المذنب (Comet)', info:'كرات ثلج فضائية', 
+    desc:'كتل جليدية ضخمة تدور حول الشمس. عندما تقترب من الشمس، يتبخر الجليد ويخلق ذيلاً مضيئاً جميلاً يمكن أن يمتد ملايين الكيلومترات.',
+    specs:[{k:'النواة',v:'جليد وصخور'},{k:'الحجم',v:'0.1-40 كم'},{k:'الذيل',v:'يصل لملايين الكم'},{k:'أشهرها',v:'هالي - كل 75 سنة'}] },
+  
+  { icon:'💨', title:'شهب البرشيات (Perseids)', info:'كابوس نيسان', 
+    desc:'أشهر زخات الشهب في السماء. تحدث في أغسطس كل سنة عندما تعبر الأرض خطة المذنب سويفت-توتل. يمكن أن ترى 50-100 شهاب في الساعة الواحدة.',
+    specs:[{k:'الموسم',v:'أغسطس'},{k:'المذنب الأصلي',v:'سويفت-توتل'},{k:'الشهب/الساعة',v:'50-100'},{k:'أفضل مشاهدة',v:'منتصف الليل'}] },
+  
+  { icon:'✨', title:'شهب الرباعيات (Quadrantids)', info:'سنة جديدة في السماء', 
+    desc:'ثاني أفضل زخة شهب في السنة، تحدث في يناير. المذنب الأصلي قد يكون فراغم 2003 EH1 أو كويكب قديم. تشتهر بأنها سريعة ومضيئة جداً.',
+    specs:[{k:'الموسم',v:'يناير'},{k:'الذروة',v:'3-4 يناير'},{k:'الشهب/الساعة',v:'40-100'},{k:'الخصائص',v:'سريعة وزرقاء'}] },
+  
+  { icon:'🌙', title:'الليونيات (Leonids)', info:'الشهب الخريفية', 
+    desc:'زخة شهب قديمة وشهيرة تحدث في نوفمبر من كل سنة. مرتبطة بمذنب تيمبل-تاتل. كانت تحدث "عواصف" شهب مذهلة في القرن التاسع عشر.',
+    specs:[{k:'الموسم',v:'نوفمبر'},{k:'المذنب',v:'تيمبل-تاتل'},{k:'الشهب/الساعة',v:'10-15'},{k:'الذروة',v:'17-18 نوفمبر'}] },
+];
+const metContainer=document.getElementById('meteors-container');
+meteorsData.forEach(m=>{
+  const div=document.createElement('div');
+  div.className='meteor-card reveal';
+  div.innerHTML=`
+    <div class="met-header">
+      <div class="met-icon">${m.icon}</div>
+      <div>
+        <div class="met-title">${m.title}</div>
+        <div class="met-info">${m.info}</div>
+      </div>
+    </div>
+    <p class="met-desc">${m.desc}</p>
+    <div class="met-specs">
+      ${m.specs.map(s=>`<div class="met-spec"><strong>${s.k}:</strong> ${s.v}</div>`).join('')}
+    </div>`;
+  metContainer.appendChild(div);
+});
+
+/* ===== SCROLL REVEAL (all .reveal) ===== */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
